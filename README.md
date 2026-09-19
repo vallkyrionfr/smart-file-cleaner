@@ -1,4 +1,6 @@
-# 🧹 Smart File Cleaner (`sfc`)
+<p align="center">
+  <img src="assets/banner.svg" alt="Smart File Cleaner Banner" width="100%" />
+</p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/version-1.0.0-emerald?style=for-the-badge&labelColor=09090b" alt="Version 1.0.0" />
@@ -12,6 +14,14 @@
 <p align="center">
   <b>A production-grade, safe, cross-platform CLI tool to organize, clean, deduplicate, and analyze disk storage.</b><br/>
   Zero overwrites. Dry-run by default. Moves files to native OS Trash instead of permanent destruction.
+</p>
+
+---
+
+## 🖥️ Live Terminal Preview
+
+<p align="center">
+  <img src="assets/demo.svg" alt="Smart File Cleaner Live Terminal Demo" width="100%" />
 </p>
 
 ---

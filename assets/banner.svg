@@ -1,0 +1,254 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 300" width="100%" height="300">
+  <defs>
+    <style>
+      @keyframes slowRotateClockwise {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+      @keyframes slowRotateCounter {
+        from { transform: rotate(360deg); }
+        to { transform: rotate(0deg); }
+      }
+      @keyframes radarSweep {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      @keyframes pulseGlow {
+        0%, 100% { opacity: 0.3; transform: scale(0.96); }
+        50% { opacity: 0.85; transform: scale(1.04); }
+      }
+      @keyframes blinkCursor {
+        0%, 49% { opacity: 1; }
+        50%, 100% { opacity: 0; }
+      }
+      @keyframes scanBeam {
+        0% { transform: translateY(-50px); opacity: 0; }
+        30% { opacity: 0.5; }
+        70% { opacity: 0.5; }
+        100% { transform: translateY(220px); opacity: 0; }
+      }
+      @keyframes particleFloat {
+        0%, 100% { transform: translate(0, 0); opacity: 0.3; }
+        50% { transform: translate(4px, -6px); opacity: 0.9; }
+      }
+      @keyframes cleanCycle {
+        0%, 25% { opacity: 1; }
+        28%, 50% { opacity: 0; }
+        53%, 75% { opacity: 0; }
+        78%, 100% { opacity: 0; }
+      }
+      @keyframes dedupeCycle {
+        0%, 25% { opacity: 0; }
+        28%, 50% { opacity: 1; }
+        53%, 75% { opacity: 0; }
+        78%, 100% { opacity: 0; }
+      }
+      @keyframes organizeCycle {
+        0%, 50% { opacity: 0; }
+        53%, 75% { opacity: 1; }
+        78%, 100% { opacity: 0; }
+      }
+      @keyframes undoCycle {
+        0%, 75% { opacity: 0; }
+        78%, 98% { opacity: 1; }
+        100% { opacity: 0; }
+      }
+
+      .disk-outer {
+        transform-origin: 140px 150px;
+        animation: slowRotateClockwise 28s linear infinite;
+      }
+      .disk-inner {
+        transform-origin: 140px 150px;
+        animation: slowRotateCounter 16s linear infinite;
+      }
+      .radar-sweep {
+        transform-origin: 140px 150px;
+        animation: radarSweep 4s linear infinite;
+      }
+      .core-pulse {
+        transform-origin: 140px 150px;
+        animation: pulseGlow 3s ease-in-out infinite;
+      }
+      .cursor {
+        animation: blinkCursor 0.9s infinite;
+      }
+      .scan-beam {
+        animation: scanBeam 4.5s ease-in-out infinite;
+      }
+      .particle-1 { animation: particleFloat 3s ease-in-out infinite; }
+      .particle-2 { animation: particleFloat 4s ease-in-out infinite 1s; }
+      .particle-3 { animation: particleFloat 3.5s ease-in-out infinite 0.5s; }
+
+      .cmd-clean { animation: cleanCycle 12s infinite; }
+      .cmd-dedupe { animation: dedupeCycle 12s infinite; }
+      .cmd-organize { animation: organizeCycle 12s infinite; }
+      .cmd-undo { animation: undoCycle 12s infinite; }
+
+      .title {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        font-weight: 800;
+        font-size: 34px;
+        letter-spacing: -0.03em;
+        fill: #f4f3ee;
+      }
+      .code-font {
+        font-family: ui-monospace, "SF Mono", "Cascadia Code", "JetBrains Mono", Menlo, Consolas, monospace;
+      }
+    </style>
+
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#09090b" />
+      <stop offset="60%" stop-color="#111114" />
+      <stop offset="100%" stop-color="#18181b" />
+    </linearGradient>
+
+    <linearGradient id="glowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10b981" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#06b6d4" stop-opacity="0.2" />
+    </linearGradient>
+
+    <linearGradient id="radarGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" stop-opacity="0.4" />
+      <stop offset="50%" stop-color="#10b981" stop-opacity="0.08" />
+      <stop offset="100%" stop-color="#10b981" stop-opacity="0" />
+    </linearGradient>
+
+    <linearGradient id="beamGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" stop-opacity="0" />
+      <stop offset="50%" stop-color="#10b981" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#10b981" stop-opacity="0" />
+    </linearGradient>
+
+    <pattern id="gridPattern" x="0" y="0" width="22" height="22" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#27272a" fill-opacity="0.45" />
+    </pattern>
+  </defs>
+
+  <!-- Canvas Background -->
+  <rect width="900" height="300" rx="16" fill="url(#bgGradient)" stroke="#27272a" stroke-width="1.5" />
+  <rect width="900" height="300" rx="16" fill="url(#gridPattern)" />
+
+  <!-- LEFT: Animated Disk Scanner / Radar Visualizer -->
+  <g>
+    <!-- Background sector panel -->
+    <rect x="40" y="50" width="200" height="200" rx="12" fill="#0d0d10" stroke="#27272a" stroke-width="1" />
+
+    <!-- Static circular guides -->
+    <circle cx="140" cy="150" r="85" fill="none" stroke="#27272a" stroke-width="1" stroke-opacity="0.6" />
+    <circle cx="140" cy="150" r="60" fill="none" stroke="#27272a" stroke-width="1" stroke-opacity="0.6" />
+    <circle cx="140" cy="150" r="36" fill="none" stroke="#27272a" stroke-width="1" stroke-opacity="0.6" />
+
+    <!-- Scanning beam vertically moving -->
+    <rect x="41" y="60" width="198" height="20" fill="url(#beamGradient)" class="scan-beam" />
+
+    <!-- Outer segmented rotating ring -->
+    <g class="disk-outer">
+      <circle cx="140" cy="150" r="82" fill="none" stroke="#3f3f46" stroke-width="2" stroke-dasharray="16 12 30 8 4 10" stroke-linecap="round" />
+      <circle cx="140" cy="150" r="82" fill="none" stroke="#10b981" stroke-width="2.5" stroke-dasharray="24 160" stroke-linecap="round" />
+    </g>
+
+    <!-- Inner counter-rotating ring -->
+    <g class="disk-inner">
+      <circle cx="140" cy="150" r="56" fill="none" stroke="#52525b" stroke-width="1.5" stroke-dasharray="10 18 24 14" stroke-linecap="round" />
+      <circle cx="140" cy="150" r="56" fill="none" stroke="#f4f3ee" stroke-width="2" stroke-dasharray="14 130" stroke-linecap="round" />
+    </g>
+
+    <!-- Radar sweeping beam sector -->
+    <g class="radar-sweep">
+      <path d="M 140 150 L 140 65 A 85 85 0 0 1 200 90 Z" fill="url(#radarGradient)" />
+      <line x1="140" y1="150" x2="140" y2="65" stroke="#10b981" stroke-width="1.5" stroke-linecap="round" />
+    </g>
+
+    <!-- Core glowing engine -->
+    <circle cx="140" cy="150" r="14" fill="#10b981" fill-opacity="0.25" class="core-pulse" />
+    <circle cx="140" cy="150" r="7" fill="#10b981" />
+    <circle cx="140" cy="150" r="3" fill="#f4f3ee" />
+
+    <!-- Corner reticles -->
+    <path d="M 48 62 L 48 56 L 54 56" fill="none" stroke="#52525b" stroke-width="1.5" />
+    <path d="M 232 62 L 232 56 L 226 56" fill="none" stroke="#52525b" stroke-width="1.5" />
+    <path d="M 48 238 L 48 244 L 54 244" fill="none" stroke="#52525b" stroke-width="1.5" />
+    <path d="M 232 238 L 232 244 L 226 244" fill="none" stroke="#52525b" stroke-width="1.5" />
+
+    <!-- Sector telemetry label -->
+    <text x="140" y="235" text-anchor="middle" class="code-font" font-size="9" fill="#71717a" letter-spacing="0.1em">SECTOR 0x7F // LIVE</text>
+  </g>
+
+  <!-- RIGHT: Typography & Live Interactive Showcase -->
+  <g transform="translate(280, 0)">
+    <!-- Category & Status Badge -->
+    <g transform="translate(0, 48)">
+      <rect width="186" height="22" rx="4" fill="#18181b" stroke="#27272a" stroke-width="1" />
+      <circle cx="12" cy="11" r="3.5" fill="#10b981" />
+      <text x="24" y="15" class="code-font" font-size="10" font-weight="600" fill="#a1a1aa" letter-spacing="0.08em">SYSTEM STORAGE // v1.0.0</text>
+    </g>
+
+    <!-- Project Title -->
+    <text x="0" y="106" class="title">smart-file-cleaner</text>
+
+    <!-- Subtitle -->
+    <text x="0" y="128" class="code-font" font-size="12.5" font-weight="500" fill="#a1a1aa" letter-spacing="0.04em">
+      CROSS-PLATFORM STORAGE ORGANIZER, DEDUPER &amp; CRUFT PURGER
+    </text>
+
+    <!-- Animated Command Preview Terminal Box -->
+    <g transform="translate(0, 146)">
+      <rect width="570" height="42" rx="6" fill="#0d0d10" stroke="#27272a" stroke-width="1" />
+      
+      <!-- Terminal prompt indicator -->
+      <text x="14" y="26" class="code-font" font-size="13" font-weight="600" fill="#10b981">$</text>
+      
+      <!-- Cycling Command Text 1: Clean -->
+      <g class="cmd-clean">
+        <text x="32" y="26" class="code-font" font-size="13" fill="#f4f3ee">sfc clean ~/Downloads --execute</text>
+        <text x="340" y="26" class="code-font" font-size="11" fill="#71717a"># purge caches, OS cruft &amp; empty dirs</text>
+      </g>
+      
+      <!-- Cycling Command Text 2: Dedupe -->
+      <g class="cmd-dedupe">
+        <text x="32" y="26" class="code-font" font-size="13" fill="#f4f3ee">sfc dedupe ~/Downloads --keep newest</text>
+        <text x="375" y="26" class="code-font" font-size="11" fill="#71717a"># 3-tier hash deduplication</text>
+      </g>
+
+      <!-- Cycling Command Text 3: Organize -->
+      <g class="cmd-organize">
+        <text x="32" y="26" class="code-font" font-size="13" fill="#f4f3ee">sfc organize ~/Downloads --execute</text>
+        <text x="345" y="26" class="code-font" font-size="11" fill="#71717a"># categorize by type with zero-overwrite</text>
+      </g>
+
+      <!-- Cycling Command Text 4: Undo -->
+      <g class="cmd-undo">
+        <text x="32" y="26" class="code-font" font-size="13" fill="#f4f3ee">sfc undo --execute</text>
+        <text x="210" y="26" class="code-font" font-size="11" fill="#71717a"># instant rollback to original locations</text>
+      </g>
+
+      <!-- Blinking Cursor -->
+      <rect x="548" y="16" width="7" height="14" rx="1" fill="#10b981" class="cursor" />
+    </g>
+
+    <!-- Bottom Feature Pills -->
+    <g transform="translate(0, 212)">
+      <!-- Pill 1: OS Trash -->
+      <rect x="0" y="0" width="130" height="26" rx="5" fill="#18181b" stroke="#27272a" stroke-width="1" />
+      <text x="65" y="17" text-anchor="middle" class="code-font" font-size="10.5" font-weight="600" fill="#f4f3ee">🗑️ OS TRASH SAFE</text>
+
+      <!-- Pill 2: 3-Tier Dedupe -->
+      <rect x="140" y="0" width="144" height="26" rx="5" fill="#18181b" stroke="#27272a" stroke-width="1" />
+      <text x="212" y="17" text-anchor="middle" class="code-font" font-size="10.5" font-weight="600" fill="#f4f3ee">⚡ 3-TIER DEDUPER</text>
+
+      <!-- Pill 3: Instant Undo -->
+      <rect x="294" y="0" width="124" height="26" rx="5" fill="#18181b" stroke="#27272a" stroke-width="1" />
+      <text x="356" y="17" text-anchor="middle" class="code-font" font-size="10.5" font-weight="600" fill="#f4f3ee">↩️ ATOMIC UNDO</text>
+
+      <!-- Pill 4: XDG Config -->
+      <rect x="428" y="0" width="142" height="26" rx="5" fill="#18181b" stroke="#27272a" stroke-width="1" />
+      <text x="499" y="17" text-anchor="middle" class="code-font" font-size="10.5" font-weight="600" fill="#f4f3ee">⚙️ XDG TOML CONFIG</text>
+    </g>
+
+    <!-- Platform Telemetry Footer -->
+    <text x="0" y="262" class="code-font" font-size="10" font-weight="500" fill="#71717a" letter-spacing="0.08em">
+      PLATFORMS: LINUX • WINDOWS • MACOS &nbsp;|&nbsp; PYTHON 3.9 - 3.13 &nbsp;|&nbsp; ZERO OVERWRITES
+    </text>
+  </g>
+</svg>

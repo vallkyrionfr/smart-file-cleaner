@@ -1,0 +1,193 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 430" width="100%" height="430">
+  <defs>
+    <style>
+      @keyframes typeCommand {
+        0%, 15% { width: 0; }
+        30%, 100% { width: 280px; }
+      }
+      @keyframes showScan {
+        0%, 28% { opacity: 0; transform: translateY(6px); }
+        35%, 100% { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes progressBar {
+        0%, 30% { width: 0%; }
+        48%, 100% { width: 100%; }
+      }
+      @keyframes showTable {
+        0%, 46% { opacity: 0; transform: translateY(8px); }
+        54%, 100% { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes showResult {
+        0%, 64% { opacity: 0; transform: translateY(6px); }
+        72%, 100% { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes cursorBlink {
+        0%, 49% { opacity: 1; }
+        50%, 100% { opacity: 0; }
+      }
+      @keyframes overallLoop {
+        0%, 92% { opacity: 1; }
+        96%, 100% { opacity: 0; }
+      }
+
+      .session-container {
+        animation: overallLoop 14s ease-in-out infinite;
+      }
+      .command-typing {
+        overflow: hidden;
+        white-space: nowrap;
+        display: inline-block;
+        animation: typeCommand 14s steps(26, end) infinite;
+      }
+      .scan-block {
+        animation: showScan 14s ease-out infinite;
+      }
+      .progress-fill {
+        animation: progressBar 14s ease-in-out infinite;
+      }
+      .table-block {
+        animation: showTable 14s ease-out infinite;
+      }
+      .result-block {
+        animation: showResult 14s ease-out infinite;
+      }
+      .blink-cursor {
+        animation: cursorBlink 0.8s infinite;
+      }
+
+      .font-mono {
+        font-family: ui-monospace, "SF Mono", "Cascadia Code", "JetBrains Mono", Menlo, Consolas, monospace;
+      }
+      .header-title {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        fill: #a1a1aa;
+      }
+    </style>
+
+    <linearGradient id="termBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0e0e11" />
+      <stop offset="100%" stop-color="#08080a" />
+    </linearGradient>
+
+    <linearGradient id="accentBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#06b6d4" />
+    </linearGradient>
+
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#18181b" />
+      <stop offset="100%" stop-color="#111113" />
+    </linearGradient>
+  </defs>
+
+  <!-- Outer Window Shadow / Frame -->
+  <rect x="1" y="1" width="878" height="428" rx="12" fill="url(#termBg)" stroke="#27272a" stroke-width="1.5" />
+
+  <!-- Terminal Window Header Bar -->
+  <path d="M 1 13 C 1 6.5 6.5 1 13 1 L 867 1 C 873.5 1 879 6.5 879 13 L 879 38 L 1 38 Z" fill="url(#headerGrad)" stroke="#27272a" stroke-width="1" />
+  <line x1="1" y1="38" x2="879" y2="38" stroke="#27272a" stroke-width="1" />
+
+  <!-- Window Control Buttons (macOS style) -->
+  <circle cx="22" cy="19" r="6" fill="#ef4444" fill-opacity="0.85" />
+  <circle cx="42" cy="19" r="6" fill="#f59e0b" fill-opacity="0.85" />
+  <circle cx="62" cy="19" r="6" fill="#10b981" fill-opacity="0.85" />
+
+  <!-- Terminal Title -->
+  <text x="440" y="24" text-anchor="middle" class="header-title">sfc — terminal session (Downloads)</text>
+
+  <!-- Terminal Content Body -->
+  <g class="session-container" transform="translate(28, 48)">
+
+    <!-- Command Prompt Line -->
+    <g transform="translate(0, 24)">
+      <text x="0" y="0" class="font-mono" font-size="13" font-weight="600" fill="#10b981">~</text>
+      <text x="14" y="0" class="font-mono" font-size="13" font-weight="500" fill="#71717a">$</text>
+
+      <foreignObject x="30" y="-14" width="320" height="24">
+        <div xmlns="http://www.w3.org/1999/xhtml" class="command-typing font-mono" style="font-size: 13px; font-weight: 600; color: #f4f3ee;">
+          sfc clean ~/Downloads
+        </div>
+      </foreignObject>
+    </g>
+
+    <!-- Scanning & Progress Bar Block -->
+    <g class="scan-block" transform="translate(0, 52)">
+      <!-- Info banner -->
+      <rect width="824" height="42" rx="6" fill="#121216" stroke="#27272a" stroke-width="1" />
+      <text x="16" y="20" class="font-mono" font-size="12" fill="#10b981">●</text>
+      <text x="32" y="20" class="font-mono" font-size="12" font-weight="600" fill="#f4f3ee">Smart File Cleaner</text>
+      <text x="175" y="20" class="font-mono" font-size="12" fill="#71717a">— Clean Mode (DRY-RUN Safe Preview)</text>
+      
+      <!-- Progress Bar Track -->
+      <rect x="16" y="28" width="792" height="4" rx="2" fill="#27272a" />
+      <!-- Animated Progress Bar Fill -->
+      <rect x="16" y="28" width="792" height="4" rx="2" fill="url(#accentBar)" class="progress-fill" />
+    </g>
+
+    <!-- Results Table Block -->
+    <g class="table-block" transform="translate(0, 114)">
+      <rect width="824" height="152" rx="6" fill="#0d0d10" stroke="#27272a" stroke-width="1" />
+      
+      <!-- Table Header -->
+      <path d="M 0 6 C 0 2.7 2.7 0 6 0 L 818 0 C 821.3 0 824 2.7 824 6 L 824 28 L 0 28 Z" fill="#18181c" />
+      <text x="20" y="19" class="font-mono" font-size="11" font-weight="600" fill="#a1a1aa">CATEGORY / REASON</text>
+      <text x="240" y="19" class="font-mono" font-size="11" font-weight="600" fill="#a1a1aa">IDENTIFIED ITEM PATH</text>
+      <text x="730" y="19" class="font-mono" font-size="11" font-weight="600" fill="#a1a1aa" text-anchor="end">RECLAIMABLE</text>
+      <line x1="0" y1="28" x2="824" y2="28" stroke="#27272a" stroke-width="1" />
+
+      <!-- Row 1: Junk Pattern -->
+      <g transform="translate(0, 30)">
+        <text x="20" y="21" class="font-mono" font-size="12" fill="#06b6d4">Junk Pattern</text>
+        <text x="240" y="21" class="font-mono" font-size="12" fill="#f4f3ee">build_cache_dump.tmp</text>
+        <text x="730" y="21" class="font-mono" font-size="12" fill="#10b981" text-anchor="end">412.8 MB</text>
+        <line x1="0" y1="30" x2="824" y2="30" stroke="#1f1f23" stroke-width="1" />
+      </g>
+
+      <!-- Row 2: OS Cruft -->
+      <g transform="translate(0, 61)">
+        <text x="20" y="21" class="font-mono" font-size="12" fill="#f59e0b">OS Cruft</text>
+        <text x="240" y="21" class="font-mono" font-size="12" fill="#f4f3ee">.DS_Store &amp; Thumbs.db</text>
+        <text x="730" y="21" class="font-mono" font-size="12" fill="#10b981" text-anchor="end">184.0 KB</text>
+        <line x1="0" y1="30" x2="824" y2="30" stroke="#1f1f23" stroke-width="1" />
+      </g>
+
+      <!-- Row 3: Dev Cache -->
+      <g transform="translate(0, 92)">
+        <text x="20" y="21" class="font-mono" font-size="12" fill="#a78bfa">Dev Cache</text>
+        <text x="240" y="21" class="font-mono" font-size="12" fill="#f4f3ee">__pycache__/ &amp; .pytest_cache/</text>
+        <text x="730" y="21" class="font-mono" font-size="12" fill="#10b981" text-anchor="end">88.4 MB</text>
+        <line x1="0" y1="30" x2="824" y2="30" stroke="#1f1f23" stroke-width="1" />
+      </g>
+
+      <!-- Row 4: Empty Dir -->
+      <g transform="translate(0, 123)">
+        <text x="20" y="20" class="font-mono" font-size="12" fill="#71717a">Empty Directory</text>
+        <text x="240" y="20" class="font-mono" font-size="12" fill="#a1a1aa">OldDownloads_2024/UnusedArchive/</text>
+        <text x="730" y="20" class="font-mono" font-size="12" fill="#71717a" text-anchor="end">0.0 B</text>
+      </g>
+    </g>
+
+    <!-- Execution & Reclaimed Space Result Block -->
+    <g class="result-block" transform="translate(0, 284)">
+      <rect width="824" height="66" rx="6" fill="#0b1712" stroke="#065f46" stroke-width="1" />
+      
+      <circle cx="24" cy="24" r="8" fill="#10b981" fill-opacity="0.2" />
+      <path d="M 20 24 L 23 27 L 29 21" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      
+      <text x="44" y="28" class="font-mono" font-size="13" font-weight="700" fill="#10b981">Notice: Dry-run complete</text>
+      <text x="260" y="28" class="font-mono" font-size="13" fill="#f4f3ee">— 14 items found (501.4 MB reclaimable)</text>
+      
+      <text x="44" y="48" class="font-mono" font-size="11.5" fill="#a1a1aa">Run with <tspan font-weight="700" fill="#f4f3ee">--execute</tspan> to delete. Files move to OS Trash (Recycle Bin) with zero permanent data loss.</text>
+    </g>
+
+    <!-- Followup prompt line -->
+    <g class="result-block" transform="translate(0, 368)">
+      <text x="0" y="0" class="font-mono" font-size="13" font-weight="600" fill="#10b981">~</text>
+      <text x="14" y="0" class="font-mono" font-size="13" font-weight="500" fill="#71717a">$</text>
+      <rect x="28" y="-12" width="7" height="14" rx="1" fill="#10b981" class="blink-cursor" />
+    </g>
+
+  </g>
+</svg>

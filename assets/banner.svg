@@ -248,7 +248,7 @@
 
     <!-- Platform Telemetry Footer -->
     <text x="0" y="262" class="code-font" font-size="10" font-weight="500" fill="#71717a" letter-spacing="0.08em">
-      PLATFORMS: LINUX • WINDOWS • MACOS &nbsp;|&nbsp; PYTHON 3.9 - 3.13 &nbsp;|&nbsp; ZERO OVERWRITES
+      PLATFORMS: LINUX • WINDOWS • MACOS  |  PYTHON 3.9 - 3.13  |  ZERO OVERWRITES
     </text>
   </g>
 </svg>

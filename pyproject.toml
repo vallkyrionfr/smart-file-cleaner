@@ -51,9 +51,9 @@ fast = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/vescofr-oxy/smart-file-cleaner"
-Repository = "https://github.com/vescofr-oxy/smart-file-cleaner"
-Issues = "https://github.com/vescofr-oxy/smart-file-cleaner/issues"
+Homepage = "https://github.com/vallkyrionfr/smart-file-cleaner"
+Repository = "https://github.com/vallkyrionfr/smart-file-cleaner"
+Issues = "https://github.com/vallkyrionfr/smart-file-cleaner/issues"
 
 [project.scripts]
 smart-file-cleaner = "smart_file_cleaner.cli:app"

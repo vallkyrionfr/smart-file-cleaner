@@ -44,12 +44,12 @@
 
 ### Using `pipx` (Recommended)
 ```bash
-pipx install git+https://github.com/vescofr-oxy/smart-file-cleaner.git
+pipx install git+https://github.com/vallkyrionfr/smart-file-cleaner.git
 ```
 
 ### Using `pip`
 ```bash
-git clone https://github.com/vescofr-oxy/smart-file-cleaner.git
+git clone https://github.com/vallkyrionfr/smart-file-cleaner.git
 cd smart-file-cleaner
 python3 -m venv .venv
 source .venv/bin/activate  # On Windows: .\.venv\Scripts\Activate.ps1

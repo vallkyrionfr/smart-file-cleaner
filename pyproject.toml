@@ -1,0 +1,112 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "smart-file-cleaner"
+version = "1.0.0"
+description = "A safe, cross-platform CLI to organize, clean, deduplicate, and analyze files."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [
+    { name = "Valk", email = "vescofr@gmail.com" }
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: Microsoft :: Windows",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: System :: Systems Administration",
+    "Topic :: Utilities",
+]
+dependencies = [
+    "typer>=0.12.0",
+    "rich>=13.0.0",
+    "send2trash>=1.8.0",
+    "platformdirs>=4.0.0",
+    "structlog>=24.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-cov>=4.1.0",
+    "ruff>=0.5.0",
+    "mypy>=1.10.0",
+    "tomli>=2.0.0; python_version < '3.11'",
+]
+fast = [
+    "xxhash>=3.0.0",  # Optional faster hashing for dedupe on large datasets
+]
+
+[project.urls]
+Homepage = "https://github.com/vescofr-oxy/smart-file-cleaner"
+Repository = "https://github.com/vescofr-oxy/smart-file-cleaner"
+Issues = "https://github.com/vescofr-oxy/smart-file-cleaner/issues"
+
+[project.scripts]
+smart-file-cleaner = "smart_file_cleaner.cli:app"
+sfc = "smart_file_cleaner.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+# ---------------------------------------------------------------------------
+# Pytest
+# ---------------------------------------------------------------------------
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v --tb=short"
+
+# ---------------------------------------------------------------------------
+# Ruff — lint + format
+# ---------------------------------------------------------------------------
+[tool.ruff]
+target-version = "py39"
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "B",   # flake8-bugbear
+    "UP",  # pyupgrade
+    "RUF", # ruff-specific rules
+]
+ignore = [
+    "B008",  # do not perform function calls in argument defaults (Typer pattern)
+    "E501",  # line too long (handled by ruff format)
+    "UP006", # deprecated collection type
+    "UP007", # union syntax
+    "UP035", # deprecated import
+    "UP045", # optional syntax
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101", "E741", "F841"]  # allow assert, test names, mock vars
+
+# ---------------------------------------------------------------------------
+# Mypy
+# ---------------------------------------------------------------------------
+[tool.mypy]
+python_version = "3.10"
+strict = false
+warn_return_any = false
+warn_unused_configs = true
+ignore_missing_imports = true
+exclude = ["tests/"]
